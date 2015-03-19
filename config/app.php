@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => env('APP_DEBUG',true),
+	'debug' => env('APP_DEBUG'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -145,10 +145,25 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
-		// 以下引用第三方的包
-		'Ytake\LaravelSmarty\SmartyServiceProvider',
-		'SleepingOwl\Admin\AdminServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
+		/*
+		 * 第三方引用包
+		 */
+        //smarty
+        'Latrell\Smarty\SmartyServiceProvider',
+        //https://github.com/Latrell/Smarty
+
+        // 图片
+        'Intervention\Image\ImageServiceProvider',
+        //http://image.intervention.io/getting_started/installation
+
+        // 验证码
+        'DeveloperTz\SimpleCaptcha\SimpleCaptchaServiceProvider',
+        //https://github.com/developer-tz/laravel-5-simple-captcha
+
+        // Debug
+        'Barryvdh\Debugbar\ServiceProvider',
+        //https://github.com/barryvdh/laravel-debugbar
+
 	],
 
 	/*
@@ -197,16 +212,12 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
-		// 以下引用第三方的包
-		'Admin'             => 'SleepingOwl\Admin\Admin',
-		'AdminAuth'         => 'SleepingOwl\AdminAuth\Facades\AdminAuth',
-		'AssetManager'      => 'SleepingOwl\Admin\AssetManager\AssetManager',
-		'Column'            => 'SleepingOwl\Admin\Columns\Column',
-		'FormItem'          => 'SleepingOwl\Admin\Models\Form\FormItem',
-		'ModelItem'         => 'SleepingOwl\Admin\Models\ModelItem',
-
-		'Form'      => 'Illuminate\Html\FormFacade',
-		'Html'      => 'Illuminate\Html\HtmlFacade',
+		/*
+		 * 第三方引用包
+		 */
+        'Image' => 'Intervention\Image\Facades\Image',
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
+        'SimpleCaptcha'      => 'DeveloperTz\SimpleCaptcha\Facades\SimpleCaptcha',
 
 	],
 

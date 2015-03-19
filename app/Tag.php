@@ -2,7 +2,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
@@ -14,6 +13,15 @@ class Tag extends Model
      */
     public function articles()
     {
-        $this->belongsToMany('Article', 'article_tags');
+        $this->belongsToMany('App\Article', 'article_tags');
+    }
+
+    /**
+     * 所属用户
+     */
+    public function user()
+    {
+        $this->belongsTo('App\User')->withTimestamps();
+        //$this->belongsTo('App\User');
     }
 }

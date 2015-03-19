@@ -2,7 +2,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentsTable extends Migration
+class CreateUserFilesTable extends Migration
 {
 
     /**
@@ -12,17 +12,17 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        // 评论表
-        Schema::create('comments', function (Blueprint $table)
+        // 用户文件
+        Schema::create('user_files', function (Blueprint $table)
         {
-            // 主键ID
+            // 文件ID。
             $table->increments('id');
 
-            // 所属文章
-            $table->unsignedInteger('article_id', false);
+            // 所属者。
+            $table->unsignedInteger('user_id');
 
-            // 评论内容
-            $table->string('content');
+            // 文件KEY。
+            $table->char('storage_hash', 32);
 
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('comments');
+        Schema::drop('user_files');
     }
 }

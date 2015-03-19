@@ -18,6 +18,9 @@ class CreateCategorysTable extends Migration
             // 主键ID
             $table->increments('id');
 
+            // 所属用户
+            $table->unsignedInteger('user_id', false);
+
             // 名称
             $table->string('name');
 

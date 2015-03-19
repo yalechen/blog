@@ -15,4 +15,12 @@ class Mood extends Model
     ];
 
     protected $table = 'moods';
+
+    /**
+     * 所属用户
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

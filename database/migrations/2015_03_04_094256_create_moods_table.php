@@ -18,6 +18,9 @@ class CreateMoodsTable extends Migration
             // 主键ID
             $table->increments('id');
 
+            // 所属用户
+            $table->unsignedInteger('user_id', false)->index();
+
             // 父级ID
             $table->unsignedInteger('parent_id', false);
 

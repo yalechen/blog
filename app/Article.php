@@ -27,11 +27,19 @@ class Article extends Model
     protected $table = 'articles';
 
     /**
+     * 所属用户
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
      * 所属分类
      */
     public function category()
     {
-        $this->belongsTo('Category');
+        return $this->belongsTo('App\Category');
     }
 
     /**
@@ -39,6 +47,14 @@ class Article extends Model
      */
     public function tags()
     {
-        $this->belongsToMany('Tag', 'article_tags');
+        return $this->belongsToMany('App\Tag', 'article_tags')->withTimestamps();
+    }
+
+    /**
+     * 旗下评论
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Article');
     }
 }

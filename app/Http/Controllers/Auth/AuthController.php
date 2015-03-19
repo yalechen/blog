@@ -35,14 +35,4 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
-	public function getIndex()
-	{
-	    return 'ssss';
-	}
-
-	public function getAa()
-	{
-	    return 'aa';
-	}
-
 }
