@@ -14,3 +14,15 @@ Route::get('file', [
     'as' => 'FilePull',
     'uses' => 'StorageController@getFile'
 ]);
+
+Route::group([
+    'before' => 'auth'
+], function ()
+{
+    // 上传文件
+    Route::post('file', [
+        'name' => '上传文件',
+        'as' => 'FileUpload',
+        'uses' => 'StorageController@postFile'
+    ]);
+});

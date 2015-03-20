@@ -51,7 +51,7 @@ class UserFile extends Model
      */
     public function storage()
     {
-        return $this->belongsTo('Storage', 'storage_hash');
+        return $this->belongsTo('App\Storage', 'storage_hash', 'hash');
     }
 
     /**
@@ -59,7 +59,7 @@ class UserFile extends Model
      */
     public function thumbnails()
     {
-        return $this->belongsToMany('Storage', 'thumbnails', 'file_id', 'storage_hash');
+        return $this->belongsToMany('App\Storage', 'thumbnails', 'file_id', 'storage_hash');
     }
 
     /**

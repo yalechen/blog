@@ -9,6 +9,10 @@
 
 				<div class="panel-body">
 					You are logged in!
+					<form action="{{route('FileUpload')}}" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" />
+                        <input type="submit" value="保存" />
+					</form>
 				</div>
 			</div>
 		</div>

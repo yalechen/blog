@@ -6,7 +6,8 @@ use Input;
 use Validator;
 use App\UserFile;
 use App\Storage;
-use App\Article;
+use Response;
+use Auth;
 
 class StorageController extends Controller
 {
@@ -18,7 +19,7 @@ class StorageController extends Controller
     public function __construct()
     {
         // 获取存储目录
-        $this->storage_path = pathinfo(base_path(), PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
+        $this->storage_path = realpath(base_path('/storage/files')) . DIRECTORY_SEPARATOR;
         // 设置传递的文件域名称，默认为file
         $this->field_name = Input::get('file_name', 'file');
     }
@@ -45,7 +46,6 @@ class StorageController extends Controller
         }
 
         // 取得文件模型。
-        dd(Article::find(1));
         $file = Input::has('id') ? UserFile::find(Input::get('id')) : null;
         $storage = Input::has('id') ? $file->storage : Storage::find(Input::get('hash'));
 
@@ -196,7 +196,6 @@ class StorageController extends Controller
 
         // 处理文件名。
         $filename = str_replace('%', 'x', $filename);
-
         // 生成指定Mime的数据响应。
         return Response::download($this->storage_path . $storage->path, $filename, $headers, Input::get('download', 'false') == 'true' ? 'attachment' : $disposition);
     }
@@ -217,7 +216,7 @@ class StorageController extends Controller
         $file = Input::file($this->field_name);
 
         // 获取文件ID3信息。
-        $info = with(new getID3())->analyze($file->getRealPath());
+        $info = with(new \getID3())->analyze($file->getRealPath());
         // 修复ID3库对不支持的文件格式的处理。
         if (! isset($info['mime_type'])) {
             $info['mime_type'] = mime_content_type($file->getRealPath());
@@ -228,7 +227,6 @@ class StorageController extends Controller
 
         // 取得文件的hash，文件路径与文件名。
         $hash = md5_file($file->getRealPath());
-        $file_path = 'admin' . DIRECTORY_SEPARATOR . date('Y') . DIRECTORY_SEPARATOR . date('m') . DIRECTORY_SEPARATOR . $hash . '.' . $file->getClientOriginalExtension();
         $filename = "{$hash}." . $file->getClientOriginalExtension();
 
         // 取得hash的文件。
@@ -245,11 +243,11 @@ class StorageController extends Controller
             $storage->height = @$info['video']['resolution_y'] ?  : 0;
             $storage->seconds = @$info['playtime_seconds'] ?  : 0;
             $storage->mime = @$info['mime_type'] ?  : '';
-            $storage->path = $file_path;
+            $storage->path = basename($filename);
 
             $storage->save();
             // 移动文件到存储目录
-            $file->move($this->storage_path . 'admin' . DIRECTORY_SEPARATOR . date('Y') . DIRECTORY_SEPARATOR . date('m') . DIRECTORY_SEPARATOR, $filename);
+            $file->move($this->storage_path . DIRECTORY_SEPARATOR, $filename);
         }
 
         // 关联用户的视频。
