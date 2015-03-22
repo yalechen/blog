@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call('ArticleTableSeeder');
         // 心情
         $this->call('MoodTableSeeder');
+        // 文件
+        $this->call('StorageTableSeeder');
 
         $this->command->info('seed end!');
     }

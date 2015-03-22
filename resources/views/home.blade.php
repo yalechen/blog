@@ -9,6 +9,11 @@
 
 				<div class="panel-body">
 					You are logged in!
+					<form action="{{route('FileUpload')}}" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" />
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="submit" value="保存" />
+					</form>
 				</div>
 			</div>
 		</div>
