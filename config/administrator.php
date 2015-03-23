@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 return array(
 
     /**
@@ -21,7 +22,7 @@ return array(
      * @type string
      */
     // 'model_config_path' => config_path('administrator'),
-    'model_config_path' => app_path('administrator/models'),
+    'model_config_path' => app_path('Administrator/Models'),
 
     /**
      * The path to your settings config directory
@@ -29,7 +30,7 @@ return array(
      * @type string
      */
     // 'settings_config_path' => config_path('administrator/settings'),
-    'settings_config_path' => app_path('administrator/settings'),
+    'settings_config_path' => app_path('Administrator/Settings'),
 
     /**
      * The menu structure of the site.
@@ -54,7 +55,8 @@ return array(
      * )
      */
     'menu' => array(
-        'user'
+        'user',
+        'article'
     ),
 
     /**
@@ -67,6 +69,7 @@ return array(
     'permission' => function ()
     {
         return Auth::check();
+        //return Auth::user()->hasRole('manager') || Auth::user()->hasRole('administrator');
     },
 
     /**

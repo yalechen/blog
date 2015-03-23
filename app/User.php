@@ -7,6 +7,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -106,6 +107,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * 用户的角色
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'user_roles');
+    }
+
+    /**
      * 头像CDN地址
      */
     public function getAvatarUrlAttribute()
@@ -113,5 +122,35 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return action('StorageController@getFile', [
             'hash' => $this->avatar_hash
         ]);
+    }
+
+    /**
+     * 是否是某种角色
+     */
+    public function scopeHasRole($query,$key)
+    {
+        if (! isset($this->hasRole) && Auth::check()) {
+            $this->hasRole = in_array(Role::whereKey($key)->first()->id, Auth::user()->roles()->lists('id'));
+            return $this->hasRole;
+        }
+        return $this->hasRole;
+    }
+
+    /**
+     * 用户的所有权限
+     */
+    public function getPurviewsAttribute()
+    {
+        if (! isset($this->purviews)) {
+            $this->purviews = array();
+            foreach ($this->roles()
+                ->with('purviews')
+                ->get() as $role) {
+                foreach ($role->purviews as $purview) {
+                    $this->purviews[$purview->key] = $purview;
+                }
+            }
+        }
+        return $this->purviews;
     }
 }

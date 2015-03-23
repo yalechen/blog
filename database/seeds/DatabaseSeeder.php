@@ -14,10 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->command->info('seed start!');
+
         // 省市县
         $this->call('RegionTableSeeder');
-        // 用户
+        // 用户、角色
         $this->call('UserTableSeeder');
+        // 权限
+        $this->call('PurviewTableSeeder');
         // 博文分类
         $this->call('CategoryTableSeeder');
         // 博文、评论、标签

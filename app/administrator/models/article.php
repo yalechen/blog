@@ -1,5 +1,6 @@
 <?php
-
+use App\Article;
+use Illuminate\Support\Facades\Auth;
 /**
  * Films model config
  */
@@ -22,30 +23,52 @@ return array(
         'title' => array(
             'title' => '标题'
         ),
-        'channel' => array(
-            'title' => '所属频道',
-            'relationship' => 'channel',
+        /* 'category' => array(
+            'title' => '所属分类',
+            'relationship' => 'category',
+            'select' => '(:table).name'
+        ), */
+        'user' => array(
+            'title' => '作者',
+            'relationship' => 'category',
             'select' => '(:table).name'
         ),
-        'state' => array(
-            'title' => '状态',
+        'is_hot' => array(
+            'title' => '是否置顶',
             'output' => function ($value)
             {
                 switch ($value) {
-                    case Article::STATE_NORMAL:
-                        return '正常';
+                    case Article::HOT_YES:
+                        return '是';
                 }
-                return '未知';
+                return '否';
             }
         ),
-        'sort' => array(
-            'title' => '排序'
+        'is_public' => array(
+            'title' => '是否公开',
+            'output' => function ($value)
+            {
+                switch ($value) {
+                    case Article::PUBLIC_YES:
+                        return '是';
+                }
+                return '否';
+            }
+        ),
+        'is_becomment' => array(
+            'title' => '是否可被评论',
+            'output' => function ($value)
+            {
+                switch ($value) {
+                    case Article::COMMENT_YES:
+                        return '是';
+                }
+                return '否';
+            }
         ),
         'created_at' => array(
-            'title' => '创建时间'
-        ),
-        'publish_at' => array(
-            'title' => '指定发布时间'
+            'title' => '创建时间',
+            'type' => 'wysiwyg'
         )
     ),
 
@@ -60,20 +83,34 @@ return array(
         'title' => array(
             'title' => '标题'
         ),
-        'channel' => array(
-            'title' => '频道',
+        'category' => array(
+            'title' => '分类',
             'type' => 'relationship',
             'name_field' => 'name'
         ),
-        'state' => array(
-            'title' => '状态',
+        'is_hot' => array(
+            'title' => '是否置顶',
             'type' => 'enum',
             'options' => array(
-                Article::STATE_NORMAL => '正常'
+                Article::HOT_YES => '是',
+                Article::HOT_NO => '否'
             )
         ),
-        'summary' => array(
-            'title' => '摘要'
+        'is_public' => array(
+            'title' => '是否公开',
+            'type' => 'enum',
+            'options' => array(
+                Article::PUBLIC_YES => '是',
+                Article::PUBLIC_NO => '否'
+            )
+        ),
+        'is_becomment' => array(
+            'title' => '是否可被评论',
+            'type' => 'enum',
+            'options' => array(
+                Article::COMMENT_YES => '是',
+                Article::COMMENT_NO => '否'
+            )
         ),
         'content' => array(
             'title' => '正文'
@@ -91,107 +128,50 @@ return array(
         'title' => array(
             'title' => '标题'
         ),
-        'channel' => array(
-            'title' => '频道',
+        'category' => array(
+            'title' => '分类',
             'type' => 'relationship',
             'name_field' => 'name'
         ),
-        'state' => array(
-            'title' => '状态',
+        'is_hot' => array(
+            'title' => '是否置顶',
             'type' => 'enum',
             'options' => array(
-                Article::STATE_NORMAL => '正常'
+                Article::HOT_YES => '是',
+                Article::HOT_NO => '否'
             ),
             'visible' => function ($model)
             {
                 return $model->exists;
             }
         ),
-        'sort' => array(
-            'title' => '排序',
-            'type' => 'number',
-            'value' => '255'
+        'is_public' => array(
+            'title' => '是否公开',
+            'type' => 'enum',
+            'options' => array(
+                Article::PUBLIC_YES => '是',
+                Article::PUBLIC_NO => '否'
+            ),
+            'visible' => function ($model)
+            {
+                return $model->exists;
+            }
         ),
-        'summary' => array(
-            'title' => '摘要',
-            'type' => 'textarea',
-            'limit' => 200,
-            'height' => 40
-        ),
-        'source' => array(
-            'title' => '来源',
-            'type' => 'text',
-            'limit' => 10
+        'is_becomment' => array(
+            'title' => '是否可被评论',
+            'type' => 'enum',
+            'options' => array(
+                Article::COMMENT_YES => '是',
+                Article::COMMENT_NO => '否'
+            ),
+            'visible' => function ($model)
+            {
+                return $model->exists;
+            }
         ),
         'content' => array(
             'title' => '正文',
             'type' => 'wysiwyg'
-        ),
-        'image' => array(
-            'title' => '缩略图',
-            'type' => 'image',
-            'location' => public_path('uploads/thumbs') . '/',
-            'sizes' => array(
-                array(
-                    90,
-                    60,
-                    'crop',
-                    public_path('uploads/thumbs/90x60') . '/',
-                    80
-                ),
-                array(
-                    136,
-                    100,
-                    'crop',
-                    public_path('uploads/thumbs/136x100') . '/',
-                    80
-                ),
-                array(
-                    220,
-                    160,
-                    'crop',
-                    public_path('uploads/thumbs/220x160') . '/',
-                    80
-                ),
-                array(
-                    275,
-                    180,
-                    'crop',
-                    public_path('uploads/thumbs/275x180') . '/',
-                    80
-                ),
-                array(
-                    447,
-                    270,
-                    'crop',
-                    public_path('uploads/thumbs/447x270') . '/',
-                    80
-                ),
-                array(
-                    500,
-                    275,
-                    'crop',
-                    public_path('uploads/thumbs/500x275') . '/',
-                    80
-                )
-            )
-        ),
-        'publish_at' => array(
-            'title' => '指定发布日期',
-            'type' => 'datetime'
-        ),
-        'relates' => array(
-            'title' => '相关文章',
-            'type' => 'relationship',
-            'name_field' => 'title',
-            'constraints' => array(
-                'channel' => 'articles'
-            )
-        ),
-        'recommends' => array(
-            'title' => '推荐到',
-            'type' => 'relationship',
-            'name_field' => 'name'
         )
     ),
 
@@ -232,21 +212,26 @@ return array(
             return array_key_exists(class_basename($model) . '.delete', Auth::user()->purviews);
         }
     ),
-
+    'actions' => array(
+        'order_up' => array(
+            'title' => 'Order Up',
+            'messages' => array(
+                'active' => 'Reordering...',
+                'success' => 'Reordered',
+                'error' => 'There was an error while reordering'
+            ),
+            'permission' => function ($model)
+            {
+                return $model->user_id == Auth::user()->id;
+            },
+            // the model is passed to the closure
+            'action' => function ($model)
+            {
+                // get all the items of this model and reorder them
+                $model->orderUp();
+            }
+        )
+    ),
     'global_actions' => array()
-    // 'batch_delete' => array(
-    // 'title' => '删除所有',
-    // 'confirmation' => '你确定要删除当前筛选下的所有内容？',
-    // 'messages' => array(
-    // 'active' => '<p>正在删除...</p>',
-    // 'success' => '删除完成。',
-    // 'error' => '在删除的过程中发生了一个错误！'
-    // ),
-    // 'action' => function (&$model)
-    // {
-    // $num = $model->delete();
-    // return $num ? '成功删除了 ' . $num . ' 条内容。' : '没有内容被删除。';
-    // }
-    // )
-
 );
+

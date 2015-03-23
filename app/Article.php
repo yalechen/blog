@@ -12,6 +12,11 @@ class Article extends Model
     // 是否置顶：否
     const HOT_NO = 0;
 
+    // 是否可被评论：是
+    const COMMENT_YES = 1;
+    // 是否可被评论：否
+    const COMMENT_NO = 0;
+
     // 是否公开：是
     const PUBLIC_YES = 1;
     // 是否公开：否
