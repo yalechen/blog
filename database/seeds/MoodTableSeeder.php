@@ -15,6 +15,10 @@ class MoodTableSeeder extends Seeder
         $data = array(
             array(
                 'content' => '心情很糟糕',
+                'images' => [
+                    'fa24a612110135f42e8a3b1ec5db9239',
+                    '6335184992d848f341a2aa83cf1fb277'
+                ],
                 'sub' => array(
                     array(
                         'content' => '为什么心情糟糕啊',
@@ -51,6 +55,9 @@ class MoodTableSeeder extends Seeder
             ),
             array(
                 'content' => '我喜欢她，她竟然也喜欢我',
+                'images' => [
+                    'fa24a612110135f42e8a3b1ec5db9239'
+                ],
                 'sub' => array(
                     array(
                         'content' => '恭喜恭喜',
@@ -79,6 +86,10 @@ class MoodTableSeeder extends Seeder
                     $mood->content = $user->name . "：" . $item['content'];
                     $mood->parent_id = $parent_id;
                     $mood->save();
+                    // 添加图片
+                    if (isset($item['images'])) {
+                        $mood->images()->attach($item['images']);
+                    }
 
                     $this->addData($item['sub'], $mood->id);
                 }
@@ -91,6 +102,10 @@ class MoodTableSeeder extends Seeder
                 $mood->content = $user->name . "：" . $item['content'];
                 $mood->parent_id = $parent_id;
                 $mood->save();
+                // 添加图片
+                if (isset($item['images'])) {
+                    $mood->images()->attach($item['images']);
+                }
 
                 $this->addData($item['sub'], $mood->id);
             }

@@ -1,18 +1,18 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration {
+class CreateUsersTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		// 用户表
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // 用户表
         Schema::create('users', function (Blueprint $table)
         {
             // 主键ID
@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration {
 
             // 用户名,即博客名
             $table->string('name');
+
+            // 用户昵称，显示使用
+            $table->string('nickname');
 
             // 邮箱
             $table->string('email')->unique();
@@ -51,19 +54,24 @@ class CreateUsersTable extends Migration {
             // 心情数量
             $table->unsignedInteger('mood_count', false)->default(0);
 
+            // 上一次登录时间
+            $table->timestamp('prev_login_time')->nullable();
+
+            // 最后登录时间
+            $table->timestamp('last_login_time')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('users');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('users');
+    }
 }

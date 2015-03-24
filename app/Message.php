@@ -8,4 +8,12 @@ class Message extends Model
 {
 
     protected $table = 'messages';
+
+    /**
+     * 评论谁
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

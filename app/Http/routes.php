@@ -25,4 +25,33 @@ Route::group([
         'as' => 'FileUpload',
         'uses' => 'StorageController@postFile'
     ]);
+
+    // 后台登录页
+    Route::get('admin/login', [
+        'name' => '管理后台登录页',
+        'as' => 'AdminGetLogin',
+        'uses' => 'UserController@getLogin'
+    ]);
+
+    // 后台登录
+    Route::post('admin/login', [
+        'name' => '管理后台登录处理',
+        'as' => 'AdminPostLogin',
+        'uses' => 'UserController@postLogin'
+    ]);
+
+    // 后台注册博主帐号
+    Route::post('admin/register', [
+        'name' => '后台注册博主帐号',
+        'as' => 'AdminPostRegister',
+        'uses' => 'UserController@postRegister'
+    ]);
+
+    // 后台首页
+    Route::get('admin/index', [
+        'name' => '管理后台登录页',
+        'as' => 'AdminGetIndex',
+        'uses' => 'UserController@getIndex'
+    ]);
 });
+
