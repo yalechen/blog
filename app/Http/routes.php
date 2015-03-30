@@ -15,8 +15,32 @@ Route::get('file', [
     'uses' => 'StorageController@getFile'
 ]);
 
+/**
+ * **************后台*****************
+ */
+// 后台登录页
+Route::get('admin/login', [
+    'name' => '管理后台登录页',
+    'as' => 'AdminGetLogin',
+    'uses' => 'UserController@getLogin'
+]);
+
+// 后台登录
+Route::post('admin/login', [
+    'name' => '管理后台登录处理',
+    'as' => 'AdminPostLogin',
+    'uses' => 'UserController@postLogin'
+]);
+
+// 后台注册博主帐号
+Route::post('admin/register', [
+    'name' => '后台注册博主帐号',
+    'as' => 'AdminPostRegister',
+    'uses' => 'UserController@postRegister'
+]);
+
 Route::group([
-    'before' => 'auth'
+    'middleware' => 'auth.admin'
 ], function ()
 {
     // 上传文件
@@ -26,32 +50,25 @@ Route::group([
         'uses' => 'StorageController@postFile'
     ]);
 
-    // 后台登录页
-    Route::get('admin/login', [
-        'name' => '管理后台登录页',
-        'as' => 'AdminGetLogin',
-        'uses' => 'UserController@getLogin'
-    ]);
-
-    // 后台登录
-    Route::post('admin/login', [
-        'name' => '管理后台登录处理',
-        'as' => 'AdminPostLogin',
-        'uses' => 'UserController@postLogin'
-    ]);
-
-    // 后台注册博主帐号
-    Route::post('admin/register', [
-        'name' => '后台注册博主帐号',
-        'as' => 'AdminPostRegister',
-        'uses' => 'UserController@postRegister'
-    ]);
-
     // 后台首页
     Route::get('admin/index', [
         'name' => '管理后台登录页',
         'as' => 'AdminGetIndex',
-        'uses' => 'UserController@getIndex'
+        'uses' => 'AdminController@getIndex'
+    ]);
+
+    // 个人资料
+    Route::get('admin/user/edit', [
+        'name' => '个人资料编辑',
+        'as' => 'UserEdit',
+        'uses' => 'UserControllser@edit'
+    ]);
+
+    // 个人资料
+    Route::get('admin/user/save', [
+        'name' => '个人资料保存',
+        'as' => 'UserSave',
+        'uses' => 'UserControllser@save'
     ]);
 });
 

@@ -33,6 +33,9 @@ class CreateUsersTable extends Migration
             // 手机号
             $table->string('mobile', 15)->default('');
 
+            // 真实姓名
+            $table->string('real_name')->default('');
+
             // 头像
             $table->string('avatar_hash')->default('');
 

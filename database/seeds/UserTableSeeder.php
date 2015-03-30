@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
         // 填充测试用户，并赋予角色
         $user = new User();
         $user->name = '超级管理员';
-        $user->email = 'wxychenzhijiang@163.com';
+        $user->email = 'wyxychenzhijiang@163.com';
         $user->mobile = '13799475827';
         $user->password = '123456';
         $user->province_id = 13;

@@ -59,4 +59,46 @@ class UserController extends Controller
     {
         dd(Input::all());
     }
+
+    /**
+     * Admin,修改个人资料
+     */
+    public function edit()
+    {
+        return view('user.edit')->withData(Auth::user());
+    }
+
+    /**
+     * Admin,保存个人资料
+     */
+    public function save()
+    {
+        // 验证输入。
+        $validator = Validator::make(Input::all(), [
+            'name' => 'required|unique:users,name',
+            'nickname' => 'required|unique:users,nickname',
+            'realname' => 'realname',
+            'mobile' => 'mobile',
+            'province_id' => 'required|exists:province,id',
+            'city_id' => 'required|exists:city,id',
+            'signature' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            //return Response::make($validator->messages()->first(), 402);
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $user = Auth::user();
+        $user->name = Input::get('name');
+        $user->nickname = Input::get('nickname');
+        $user->realname = Input::get('realname', '');
+        $user->mobile = Input::get('mobile', '');
+        $user->province_id = Input::get('province_id', 0);
+        $user->city_id = Input::get('city_id', 0);
+        $user->signature = Input::get('signature', 0);
+        $user->save();
+
+        return 'success';
+    }
 }
