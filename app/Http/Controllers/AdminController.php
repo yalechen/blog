@@ -15,7 +15,6 @@ class AdminController extends Controller
      */
     public function getIndex()
     {
-        dd(Auth::user());
         return view('admin.index');
     }
 }

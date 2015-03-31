@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>{block title}{{$smarty.block.child}|strip_tags|default:'管理中心'} - {/block}个人博客管理后台</title>
-    <link href="{asset('admin/bootstrap/css/bootstrap.min.css')}" rel="stylesheet" type="text/css" />
+    <link href="{asset('bootstrap/css/bootstrap.min.css')}" rel="stylesheet" type="text/css" />
     <!--[if lt IE 9]>
       <link rel="stylesheet" type="text/css" href="plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
       />
     <![endif]-->
-    <link href="{asset('admin/css/main.css')}" rel="stylesheet" type="text/css" />
-    <link href="{asset('admin/css/plugins.css')}" rel="stylesheet" type="text/css" />
-    <link href="{asset('admin/css/responsive.css')}" rel="stylesheet" type="text/css" />
-    <link href="{asset('admin/css/icons.css')}" rel="stylesheet" type="text/css" />
-    <link href="{asset('admin/css/fontawesome/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
+    <link href="{asset('css/main.css')}" rel="stylesheet" type="text/css" />
+    <link href="{asset('css/plugins.css')}" rel="stylesheet" type="text/css" />
+    <link href="{asset('css/responsive.css')}" rel="stylesheet" type="text/css" />
+    <link href="{asset('css/icons.css')}" rel="stylesheet" type="text/css" />
+    <link href="{asset('css/fontawesome/font-awesome.min.css')}" rel="stylesheet" type="text/css" />
     <!--[if IE 7]>
       <link rel="stylesheet" href="assets/css/fontawesome/font-awesome-ie7.min.css">
     <![endif]-->
@@ -21,45 +21,45 @@
       <link href="assets/css/ie8.css" rel="stylesheet" type="text/css" />
     <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />
-    <script type="text/javascript" src="{asset('admin/js/libs/jquery-1.10.2.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/bootstrap/js/bootstrap.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/libs/lodash.compat.min.js')}"></script>
+    <script type="text/javascript" src="{asset('js/libs/jquery-1.10.2.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js')}"></script>
+    <script type="text/javascript" src="{asset('bootstrap/js/bootstrap.min.js')}"></script>
+    <script type="text/javascript" src="{asset('js/libs/lodash.compat.min.js')}"></script>
     <!--[if lt IE 9]>
       <script src="assets/js/libs/html5shiv.js">
       </script>
     <![endif]-->
-    <script type="text/javascript" src="{asset('admin/plugins/touchpunch/jquery.ui.touch-punch.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/event.swipe/jquery.event.move.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/event.swipe/jquery.event.swipe.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/libs/breakpoints.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/respond/respond.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/cookie/jquery.cookie.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/slimscroll/jquery.slimscroll.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/slimscroll/jquery.slimscroll.horizontal.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/touchpunch/jquery.ui.touch-punch.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/event.swipe/jquery.event.move.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/event.swipe/jquery.event.swipe.js')}"></script>
+    <script type="text/javascript" src="{asset('js/libs/breakpoints.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/respond/respond.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/cookie/jquery.cookie.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/slimscroll/jquery.slimscroll.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/slimscroll/jquery.slimscroll.horizontal.min.js')}"></script>
     <!--[if lt IE 9]>
       <script type="text/javascript" src="plugins/flot/excanvas.min.js">
       </script>
     <![endif]-->
-    <script type="text/javascript" src="{asset('admin/plugins/sparkline/jquery.sparkline.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/flot/jquery.flot.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/flot/jquery.flot.tooltip.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/flot/jquery.flot.resize.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/flot/jquery.flot.time.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/flot/jquery.flot.growraf.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/daterangepicker/moment.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/daterangepicker/daterangepicker.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/blockui/jquery.blockUI.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/fullcalendar/fullcalendar.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/noty/jquery.noty.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/noty/layouts/top.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/noty/themes/default.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/uniform/jquery.uniform.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/plugins/select2/select2.min.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/app.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/plugins.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/plugins.form-components.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/sparkline/jquery.sparkline.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.tooltip.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.resize.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.time.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.growraf.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/easy-pie-chart/jquery.easy-pie-chart.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/daterangepicker/moment.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/daterangepicker/daterangepicker.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/blockui/jquery.blockUI.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/fullcalendar/fullcalendar.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/noty/jquery.noty.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/noty/layouts/top.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/noty/themes/default.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/uniform/jquery.uniform.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/select2/select2.min.js')}"></script>
+    <script type="text/javascript" src="{asset('js/app.js')}"></script>
+    <script type="text/javascript" src="{asset('js/plugins.js')}"></script>
+    <script type="text/javascript" src="{asset('js/plugins.form-components.js')}"></script>
     <script>
       $(document).ready(function() {
         App.init();
@@ -67,10 +67,10 @@
         FormComponents.init()
       });
     </script>
-    <script type="text/javascript" src="{asset('admin/js/custom.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/demo/pages_calendar.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/demo/charts/chart_filled_blue.js')}"></script>
-    <script type="text/javascript" src="{asset('admin/js/demo/charts/chart_simple.js')}"></script>
+    <script type="text/javascript" src="{asset('js/custom.js')}"></script>
+    <script type="text/javascript" src="{asset('js/demo/pages_calendar.js')}"></script>
+    <script type="text/javascript" src="{asset('js/demo/charts/chart_filled_blue.js')}"></script>
+    <script type="text/javascript" src="{asset('js/demo/charts/chart_simple.js')}"></script>
     {block head}{/block}
   </head>
   

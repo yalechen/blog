@@ -106,6 +106,7 @@ return [
     	'password' => '密码',
     	'email' => '邮箱地址',
     	'password' => '密码',
+    	'remember_me' => '记住密码',
     ],
 
 ];

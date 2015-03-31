@@ -13,7 +13,7 @@ class UserController extends Controller
 {
 
     /**
-     * 登录页
+     * 登录页面
      */
     public function getLogin()
     {
@@ -21,27 +21,43 @@ class UserController extends Controller
     }
 
     /**
-     * 登录处理
+     * 登录处理[邮箱和用户名都可以登录]
      */
     public function postLogin()
     {
         // 验证输入。
         $validator = Validator::make(Input::all(), [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required',
+            'password' => 'required|between:6,16',
+            'remember_me' => 'in:true,false'
         ]);
+        // 验证是否为邮箱
+        $is_email = (boolean) preg_match('/^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,3}$/i', Input::get('email'));
 
+        $validator->sometimes('email', [
+            'exists:users,email'
+        ], function ($input) use($is_email)
+        {
+            return $is_email;
+        });
+        $validator->sometimes('email', [
+            'exists:users,name'
+        ], function ($input) use($is_email)
+        {
+            return ! $is_email;
+        });
         if ($validator->fails()) {
             return Redirect::back()->withMessageError($validator->messages()
-                ->first());
+                ->first())
+                ->withInput();
         }
 
         // 登录验证。
         if (! Auth::attempt([
-            'email' => Input::get('email'),
+            $is_email ? 'email' : 'name' => Input::get('email'),
             'password' => Input::get('password')
         ], Input::get('remember_me', 'false') == 'true')) {
-            return Redirect::back()->withMessageError('账号与密码不匹配。');
+            return Redirect::back()->withMessageError('账号与密码不匹配。')->withInput();
         }
 
         $user = Auth::user();
@@ -49,7 +65,18 @@ class UserController extends Controller
         $user->last_login_time = new Carbon();
         $user->save();
 
-        return view('admin.index');
+        // 登录成功
+        return Redirect::intended();
+    }
+
+    /**
+     * 退出登录状态
+     */
+    public function logout()
+    {
+        // 退出系统
+        Auth::logout();
+        return Redirect::route('AdminIndex');
     }
 
     /**
@@ -85,7 +112,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            //return Response::make($validator->messages()->first(), 402);
+            // return Response::make($validator->messages()->first(), 402);
             return redirect()->back()->withErrors($validator->errors());
         }
 

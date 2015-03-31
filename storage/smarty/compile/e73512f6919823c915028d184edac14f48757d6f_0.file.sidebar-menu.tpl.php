@@ -1,6 +1,34 @@
+<?php /* Smarty version 3.1.22-dev/17, created on 2015-03-31 03:01:55
+         compiled from "D:/Bitnami/wampstack-5.4.26-0/apache2/htdocs/github/resources/views/admin/_layout/sidebar-menu.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:608551a0e23883830_35687841%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'e73512f6919823c915028d184edac14f48757d6f' => 
+    array (
+      0 => 'D:/Bitnami/wampstack-5.4.26-0/apache2/htdocs/github/resources/views/admin/_layout/sidebar-menu.tpl',
+      1 => 1427770877,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '608551a0e23883830_35687841',
+  'has_nocache_code' => false,
+  'version' => '3.1.22-dev/17',
+  'unifunc' => 'content_551a0e2388f3b7_50254658',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_551a0e2388f3b7_50254658')) {
+function content_551a0e2388f3b7_50254658 ($_smarty_tpl) {
+?>
+<?php
+$_smarty_tpl->properties['nocache_hash'] = '608551a0e23883830_35687841';
+?>
 <ul id="nav">
 	<li class="current">
-		<a href="{route('AdminIndex')}"><i class="icon-dashboard"></i>控制台</a>
+		<a href="<?php echo route('AdminIndex');?>
+"><i class="icon-dashboard"></i>控制台</a>
 	</li>
 	<li>
 		<a href="javascript:void(0);"><i class="icon-desktop"></i> 设置
@@ -42,4 +70,6 @@
 	<li>
 		<a href="index.html"><i class="icon-dashboard"></i>文件管理</a>
 	</li>
-</ul>
+</ul><?php }
+}
+?>

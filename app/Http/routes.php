@@ -15,6 +15,25 @@ Route::get('file', [
     'uses' => 'StorageController@getFile'
 ]);
 
+Route::group([
+    'middleware' => 'auth'
+], function ()
+{
+    // 上传文件
+    Route::post('file', [
+        'name' => '上传文件',
+        'as' => 'FileUpload',
+        'uses' => 'StorageController@postFile'
+    ]);
+});
+
+// 退出
+Route::any('logout', [
+    'name' => '后台登出',
+    'as' => 'Logout',
+    'uses' => 'UserController@logout'
+]);
+
 /**
  * **************后台*****************
  */
@@ -40,20 +59,14 @@ Route::post('admin/register', [
 ]);
 
 Route::group([
-    'middleware' => 'auth.admin'
+    'middleware' => 'auth.admin',
+    'prefix' => 'admin'
 ], function ()
 {
-    // 上传文件
-    Route::post('file', [
-        'name' => '上传文件',
-        'as' => 'FileUpload',
-        'uses' => 'StorageController@postFile'
-    ]);
-
     // 后台首页
-    Route::get('admin/index', [
+    Route::get('/', [
         'name' => '管理后台登录页',
-        'as' => 'AdminGetIndex',
+        'as' => 'AdminIndex',
         'uses' => 'AdminController@getIndex'
     ]);
 

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.22-dev/17, created on 2015-03-24 08:31:40
+<?php /* Smarty version 3.1.22-dev/17, created on 2015-03-31 03:19:50
          compiled from "D:/Bitnami/wampstack-5.4.26-0/apache2/htdocs/github/resources/views/admin/user/login.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:16790551120ec593d64_09056481%%*/
+/*%%SmartyHeaderCode:19071551a12566b2220_29652833%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,25 +9,25 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'dde118cafa0f536cd9fc7dcc8304f49461283095' => 
     array (
       0 => 'D:/Bitnami/wampstack-5.4.26-0/apache2/htdocs/github/resources/views/admin/user/login.tpl',
-      1 => 1427185803,
+      1 => 1427771076,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '16790551120ec593d64_09056481',
+  'nocache_hash' => '19071551a12566b2220_29652833',
   'variables' => 
   array (
     'message_error' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.22-dev/17',
-  'unifunc' => 'content_551120ec6ad1b6_39311216',
+  'unifunc' => 'content_551a12567e2d24_81262093',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_551120ec6ad1b6_39311216')) {
-function content_551120ec6ad1b6_39311216 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_551a12567e2d24_81262093')) {
+function content_551a12567e2d24_81262093 ($_smarty_tpl) {
 ?>
 <?php
-$_smarty_tpl->properties['nocache_hash'] = '16790551120ec593d64_09056481';
+$_smarty_tpl->properties['nocache_hash'] = '19071551a12566b2220_29652833';
 ?>
 <!DOCTYPE html>
 <html lang="en">  
@@ -35,19 +35,19 @@ $_smarty_tpl->properties['nocache_hash'] = '16790551120ec593d64_09056481';
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
    	 <title>个人博客后台登录</title>
-    <link href="<?php echo asset('admin/bootstrap/css/bootstrap.min.css');?>
+    <link href="<?php echo asset('bootstrap/css/bootstrap.min.css');?>
 " rel="stylesheet" type="text/css" />
-    <link href="<?php echo asset('admin/css/main.css');?>
+    <link href="<?php echo asset('css/main.css');?>
 " rel="stylesheet" type="text/css" />
-    <link href="<?php echo asset('admin/css/plugins.css');?>
+    <link href="<?php echo asset('css/plugins.css');?>
 " rel="stylesheet" type="text/css" />
-    <link href="<?php echo asset('admin/css/responsive.css');?>
+    <link href="<?php echo asset('css/responsive.css');?>
 " rel="stylesheet" type="text/css" />
-    <link href="<?php echo asset('admin/css/icons.css');?>
+    <link href="<?php echo asset('css/icons.css');?>
 " rel="stylesheet" type="text/css" />
-    <link href="<?php echo asset('admin/css/login.css');?>
+    <link href="<?php echo asset('css/login.css');?>
 " rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="<?php echo asset('admin/css/fontawesome/font-awesome.min.css');?>
+    <link rel="stylesheet" href="<?php echo asset('css/fontawesome/font-awesome.min.css');?>
 ">
     <!--[if IE 7]>
       <link rel="stylesheet" href="assets/css/fontawesome/font-awesome-ie7.min.css">
@@ -57,15 +57,15 @@ $_smarty_tpl->properties['nocache_hash'] = '16790551120ec593d64_09056481';
     <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/js/libs/jquery-1.10.2.min.js');?>
+ type="text/javascript" src="<?php echo asset('js/libs/jquery-1.10.2.min.js');?>
 "><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/bootstrap/js/bootstrap.min.js');?>
+ type="text/javascript" src="<?php echo asset('bootstrap/js/bootstrap.min.js');?>
 "><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/js/libs/lodash.compat.min.js');?>
+ type="text/javascript" src="<?php echo asset('js/libs/lodash.compat.min.js');?>
 "><?php echo '</script'; ?>
 >
     <!--[if lt IE 9]>
@@ -75,19 +75,19 @@ $_smarty_tpl->properties['nocache_hash'] = '16790551120ec593d64_09056481';
 >
     <![endif]-->
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/plugins/uniform/jquery.uniform.min.js');?>
+ type="text/javascript" src="<?php echo asset('plugins/uniform/jquery.uniform.min.js');?>
 "><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/plugins/validation/jquery.validate.min.js');?>
+ type="text/javascript" src="<?php echo asset('plugins/validation/jquery.validate.min.js');?>
 "><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/plugins/nprogress/nprogress.js');?>
+ type="text/javascript" src="<?php echo asset('plugins/nprogress/nprogress.js');?>
 "><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo asset('admin/js/login.js');?>
+ type="text/javascript" src="<?php echo asset('js/login.js');?>
 "><?php echo '</script'; ?>
 >
     <?php echo '</script'; ?>
@@ -103,7 +103,7 @@ $_smarty_tpl->properties['nocache_hash'] = '16790551120ec593d64_09056481';
   
   <body class="login">
     <div class="logo">
-      <img src="<?php echo asset('admin/img/logo.png');?>
+      <img src="<?php echo asset('img/logo.png');?>
 " alt="logo" />
       <strong>个人博客后台登录</strong>Admin</div>
     <div class="box">
@@ -131,7 +131,7 @@ echo (($tmp = @Session::get('message_error'))===null||$tmp==='' ? $_smarty_tpl->
             </div>
           </div>
           <div class="form-actions">
-            <label class="checkbox pull-left"><input type="checkbox" class="uniform" name="remember_me"> 记住密码</label>
+            <label class="checkbox pull-left"><input type="checkbox" class="uniform" name="remember_me" value="true"> 记住密码</label>
             <button type="submit" class="submit btn btn-primary pull-right"> 登录 <i class="icon-angle-right"></i></button>
           </div>
         </form>

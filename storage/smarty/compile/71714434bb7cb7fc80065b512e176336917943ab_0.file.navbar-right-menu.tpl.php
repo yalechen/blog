@@ -1,3 +1,30 @@
+<?php /* Smarty version 3.1.22-dev/17, created on 2015-03-31 03:40:32
+         compiled from "D:/Bitnami/wampstack-5.4.26-0/apache2/htdocs/github/resources/views/admin/_layout/navbar-right-menu.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:7855551a1730c0ec69_00305364%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '71714434bb7cb7fc80065b512e176336917943ab' => 
+    array (
+      0 => 'D:/Bitnami/wampstack-5.4.26-0/apache2/htdocs/github/resources/views/admin/_layout/navbar-right-menu.tpl',
+      1 => 1427773127,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '7855551a1730c0ec69_00305364',
+  'has_nocache_code' => false,
+  'version' => '3.1.22-dev/17',
+  'unifunc' => 'content_551a1730c26360_49724433',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_551a1730c26360_49724433')) {
+function content_551a1730c26360_49724433 ($_smarty_tpl) {
+?>
+<?php
+$_smarty_tpl->properties['nocache_hash'] = '7855551a1730c0ec69_00305364';
+?>
 <ul class="nav navbar-nav navbar-right">
 	<li class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-warning-sign"></i><span class="badge">5</span></a>
@@ -129,7 +156,8 @@
     <li class="dropdown user">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			<i class="icon-male"></i>
-            <span class="username">{Auth::user()->username}</span>
+            <span class="username"><?php echo Auth::user()->username;?>
+</span>
             <i class="icon-caret-down small"></i>
 		</a>
 		<ul class="dropdown-menu">
@@ -137,7 +165,10 @@
             <li><a href="pages_calendar.html"><i class="icon-calendar"></i>我的日历</a></li>
             <li><a href="#"><i class="icon-tasks"></i>我的任务</a></li>
             <li class="divider"></li>
-			<li><a href="{route('Logout')}"><i class="icon-key"></i>退出</a></li>
+			<li><a href="<?php echo route('Logout');?>
+"><i class="icon-key"></i>退出</a></li>
 		</ul>
 	</li>
-</ul>
+</ul><?php }
+}
+?>

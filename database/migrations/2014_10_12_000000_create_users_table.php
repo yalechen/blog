@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
 
             // 用户名,即博客名
-            $table->string('name');
+            $table->string('name')->unique();
 
             // 用户昵称，显示使用
             $table->string('nickname');

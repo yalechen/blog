@@ -3,7 +3,7 @@
 {block title}首页{/block}
 
 {block breadcrumb}
-	<li><i class="icon-home"></i><a href="{route('AdminGetIndex')}"> 控制台</a></li>
+	<li><i class="icon-home"></i><a href="{route('AdminIndex')}"> 控制台</a></li>
 	{*<li class="current"><a href="pages_calendar.html" title="">日历</a></li>*}
 {/block}
 
