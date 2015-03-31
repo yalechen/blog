@@ -15,6 +15,20 @@ Route::get('file', [
     'uses' => 'StorageController@getFile'
 ]);
 
+// 获取城市列表
+Route::get('city', [
+    'as' => 'CityPull',
+    'name' => '获取城市列表',
+    'uses' => 'GlobalController@getCity'
+]);
+
+// 获取区县列表
+Route::get('district', [
+    'as' => 'DistrictPull',
+    'name' => '获取区县列表',
+    'uses' => 'GlobalController@getDistrict'
+]);
+
 Route::group([
     'middleware' => 'auth'
 ], function ()
@@ -70,18 +84,25 @@ Route::group([
         'uses' => 'AdminController@getIndex'
     ]);
 
-    // 个人资料
-    Route::get('admin/user/edit', [
-        'name' => '个人资料编辑',
-        'as' => 'UserEdit',
-        'uses' => 'UserControllser@edit'
+    // 博主列表
+    Route::get('user/list', [
+        'name' => '博主列表',
+        'as' => 'UserList',
+        'uses' => 'UserController@getList'
     ]);
 
-    // 个人资料
-    Route::get('admin/user/save', [
+    // 新增及编辑博主
+    Route::get('user/edit', [
+        'name' => '个人资料编辑',
+        'as' => 'UserEdit',
+        'uses' => 'UserController@edit'
+    ]);
+
+    // 博主资料保存
+    Route::post('user/save', [
         'name' => '个人资料保存',
         'as' => 'UserSave',
-        'uses' => 'UserControllser@save'
+        'uses' => 'UserController@save'
     ]);
 });
 

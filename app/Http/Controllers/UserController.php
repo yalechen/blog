@@ -8,6 +8,8 @@ use Response;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use App\Province;
+use App\User;
 
 class UserController extends Controller
 {
@@ -88,11 +90,21 @@ class UserController extends Controller
     }
 
     /**
+     * 博主列表
+     */
+    public function getList()
+    {
+        return view('admin.user.list')->withData(User::all());
+    }
+
+    /**
      * Admin,修改个人资料
      */
     public function edit()
     {
-        return view('user.edit')->withData(Auth::user());
+        return view('admin.user.edit')->withData(Auth::user())
+            ->withId(Input::get('id', 0))
+            ->withProvinces(Province::all());
     }
 
     /**
@@ -102,30 +114,32 @@ class UserController extends Controller
     {
         // 验证输入。
         $validator = Validator::make(Input::all(), [
+            'email' => 'required|unique:users,email',
             'name' => 'required|unique:users,name',
             'nickname' => 'required|unique:users,nickname',
-            'realname' => 'realname',
-            'mobile' => 'mobile',
+            // 'realname' => 'realname',
+            'mobile' => 'required|mobile',
             'province_id' => 'required|exists:province,id',
             'city_id' => 'required|exists:city,id',
             'signature' => 'required'
         ]);
 
         if ($validator->fails()) {
-            // return Response::make($validator->messages()->first(), 402);
-            return redirect()->back()->withErrors($validator->errors());
+            return $validator->messages()->first();
+            // return redirect()->back()->withErrors($validator->errors());
         }
 
-        $user = Auth::user();
+        $user = Input::has('id') ? User::find(Input::get('id')) : new User();
+        $user->email = Input::get('email');
         $user->name = Input::get('name');
         $user->nickname = Input::get('nickname');
-        $user->realname = Input::get('realname', '');
-        $user->mobile = Input::get('mobile', '');
+        $user->realname = Input::get('realname');
+        $user->mobile = Input::get('mobile');
         $user->province_id = Input::get('province_id', 0);
         $user->city_id = Input::get('city_id', 0);
-        $user->signature = Input::get('signature', 0);
+        $user->signature = Input::get('signature');
         $user->save();
 
-        return 'success';
+        return $user;
     }
 }

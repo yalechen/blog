@@ -14,6 +14,13 @@
         </ul>
 	</li>
 	<li>
+		<a href="javascript:void(0);"><i class="icon-desktop"></i> 博主管理</a>
+        <ul class="sub-menu">
+        	<li><a href="{route('UserEdit')}"><i class="icon-angle-right"></i>新增博主</a></li>
+			<li><a href="{route('UserList')}"><i class="icon-angle-right"></i>博主列表</a></li>
+        </ul>
+	</li>
+	<li>
 		<a href="javascript:void(0);"><i class="icon-edit"></i> 博文管理</a>
 		<ul class="sub-menu">
 			<li><a href="form_layouts.html"><i class="icon-angle-right"></i>草稿箱</a>
