@@ -68,7 +68,8 @@ class UserController extends Controller
         $user->save();
 
         // 登录成功
-        return Redirect::intended();
+        return Redirect::route('AdminIndex');
+        // return Redirect::intended();
     }
 
     /**
@@ -114,14 +115,19 @@ class UserController extends Controller
     {
         // 验证输入。
         $validator = Validator::make(Input::all(), [
-            'email' => 'required|unique:users,email',
-            'name' => 'required|unique:users,name',
-            'nickname' => 'required|unique:users,nickname',
+            'email' => 'required|unique:users,email,' . Input::get('id', 0),
+            'name' => 'required|unique:users,name,' . Input::get('id', 0),
+            'nickname' => 'required|unique:users,nickname,' . Input::get('id', 0),
             // 'realname' => 'realname',
             'mobile' => 'required|mobile',
             'province_id' => 'required|exists:province,id',
             'city_id' => 'required|exists:city,id',
             'signature' => 'required'
+        ], [
+            'name.required' => '用户名不能为空',
+            'name.unique' => '用户名已经存在',
+            'nickname.required' => '昵称不能为空',
+            'nickname.unique' => '昵称不能为空'
         ]);
 
         if ($validator->fails()) {

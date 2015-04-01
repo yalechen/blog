@@ -4,62 +4,71 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Validator;
+use App\UserFile;
 
 abstract class Controller extends BaseController
 {
 
     use DispatchesCommands, ValidatesRequests;
 
-    // // 手机号验证
+    public function __construct()
+    {
+        $this->validatorExtend();
+    }
 
-    // Validator::extend('mobile', function ($attribute, $value, $parameters)
-    // {
-    // if (preg_match('/^1[3|4|5|7|8][0-9]{9}$/', $value)) {
-    // return true;
-    // }
-    // return false;
-    // });
+    protected function validatorExtend()
+    {
+        // 手机号验证
+        Validator::extend('mobile', function ($attribute, $value, $parameters)
+        {
+            if (preg_match('/^1[3|4|5|7|8][0-9]{9}$/', $value)) {
+                return true;
+            }
+            return false;
+        });
 
-    // // 验证图片。
-    // Validator::extend('user_file_mime', function ($attribute, $value, $parameters)
-    // {
-    // $pids = (array) $value;
-    // if ($pids) {
-    // $pictures = UserFile::whereIn('id', $pids)->get();
-    // if (count($pictures) != count($pids)) {
-    // return false;
-    // }
-    // foreach ($pictures as $picture) {
-    // if (! preg_match($parameters[0], $picture->storage->mime)) {
-    // return false;
-    // }
-    // }
-    // }
-    // return true;
-    // });
+        // 验证图片。
+        Validator::extend('user_file_mime', function ($attribute, $value, $parameters)
+        {
+            $pids = (array) $value;
+            if ($pids) {
+                $pictures = UserFile::whereIn('id', $pids)->get();
+                if (count($pictures) != count($pids)) {
+                    return false;
+                }
+                foreach ($pictures as $picture) {
+                    if (! preg_match($parameters[0], $picture->storage->mime)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
 
-    // // 验证身份证号码 http://blog.sina.com.cn/s/blog_8c68af43010170rv.html
-    // Validator::extend('id_number', function ($attribute, $value, $parameters)
-    // {
-    // // 15位身份证
-    // if (preg_match('/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/', $value)) {
-    // return true;
-    // }
-    // // 18位身份证
-    // if (preg_match('/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$/', $value)) {
-    // return true;
-    // }
-    // return false;
-    // });
+        // 验证身份证号码 http://blog.sina.com.cn/s/blog_8c68af43010170rv.html
+        Validator::extend('id_number', function ($attribute, $value, $parameters)
+        {
+            // 15位身份证
+            if (preg_match('/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/', $value)) {
+                return true;
+            }
+            // 18位身份证
+            if (preg_match('/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$/', $value)) {
+                return true;
+            }
+            return false;
+        });
 
-    // // 验证真实姓名
-    // Validator::extend('real_name', function ($attribute, $value, $parameters)
-    // {
-    // if (preg_match('/^[\x{4e00}-\x{9fa5}]{2,4}$/u', $value)) {
-    // return true;
-    // }
-    // return false;
-    // });
+        // 验证真实姓名
+        Validator::extend('realname', function ($attribute, $value, $parameters)
+        {
+            if (preg_match('/^[\x{4e00}-\x{9fa5}]{2,4}$/u', $value)) {
+                return true;
+            }
+            return false;
+        });
+    }
 
     // protected function setupCaptcha()
     // {

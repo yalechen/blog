@@ -1,10 +1,10 @@
 {extends file='admin/_layout/main.tpl'}
 
-{block title}首页{/block}
+{block title}{if $id gt 0}{assign "hname" "编辑"}{else}{assign "hname" "新增"}{/if}{$hname}博主{/block}
 
 {block breadcrumb}
 	<li><i class="icon-home"></i><a href="{route('UserList')}"> 用户列表</a></li>
-	<li class="current"><a href="{route('UserEdit')}" title=""> 编辑用户</a></li>
+	<li class="current"><a href="{route('UserEdit')}" title=""> {$hname}用户</a></li>
 {/block}
 
 {block main}
@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="widget box">
-			<div class="widget-header"><h4><i class="icon-reorder"></i>新增/编辑博主</h4></div>
+			<div class="widget-header"><h4><i class="icon-reorder"></i>{$hname}博主</h4></div>
 			<div class="page-header"></div>
             <div class="widget-content">
 				<form class="form-horizontal row-border" id="user_form">
@@ -147,9 +147,9 @@ $("#submit_btn").click(function() {
         },
         error : function(xhq) {
             obj.attr('data-action', 0);
-            ialert(xhq.responseText);
+            alert(xhq.responseText);
         }
-    });s
+    });
 });
 </script>
 {/block}

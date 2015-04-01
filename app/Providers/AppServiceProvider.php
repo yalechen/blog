@@ -2,8 +2,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
-use App\Validator\CustomValidator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,13 +12,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        // 注册自定义验证器扩展
-        Validator::resolver(function ($translator, $data, $rules, $messages)
-        {
-            return new CustomValidator($translator, $data, $rules, $messages);
-        });
-    }
+    {}
 
     /**
      * Register any application services.
