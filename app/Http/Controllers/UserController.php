@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use App\Province;
 use App\User;
+use Request;
 
 class UserController extends Controller
 {
@@ -103,8 +104,8 @@ class UserController extends Controller
      */
     public function edit()
     {
-        return view('admin.user.edit')->withData(Auth::user())
-            ->withId(Input::get('id', 0))
+        return view('admin.user.edit')->withData(User::find(Input::get('id', 0)))
+            ->withId(Input::get('id'))
             ->withProvinces(Province::all());
     }
 
@@ -116,27 +117,31 @@ class UserController extends Controller
         // 验证输入。
         $validator = Validator::make(Input::all(), [
             'email' => 'required|unique:users,email,' . Input::get('id', 0),
+            'password' => 'required_without:id',
             'name' => 'required|unique:users,name,' . Input::get('id', 0),
             'nickname' => 'required|unique:users,nickname,' . Input::get('id', 0),
-            // 'realname' => 'realname',
+            'realname' => 'realname',
             'mobile' => 'required|mobile',
             'province_id' => 'required|exists:province,id',
             'city_id' => 'required|exists:city,id',
             'signature' => 'required'
         ], [
             'name.required' => '用户名不能为空',
-            'name.unique' => '用户名已经存在',
-            'nickname.required' => '昵称不能为空',
-            'nickname.unique' => '昵称不能为空'
+            'name.unique' => '用户名已经存在'
         ]);
 
         if ($validator->fails()) {
-            return $validator->messages()->first();
-            // return redirect()->back()->withErrors($validator->errors());
+            return redirect()->back()
+                ->withInput()
+                ->withMessageError($validator->errors()
+                ->all());
         }
-
+        // 保存数据
         $user = Input::has('id') ? User::find(Input::get('id')) : new User();
         $user->email = Input::get('email');
+        if (Input::has('password')) {
+            $user->password = Input::get('password');
+        }
         $user->name = Input::get('name');
         $user->nickname = Input::get('nickname');
         $user->realname = Input::get('realname');
@@ -146,6 +151,31 @@ class UserController extends Controller
         $user->signature = Input::get('signature');
         $user->save();
 
-        return $user;
+        // 结果返回
+        return redirect()->back()->withMessageSuccess('Success');
+    }
+
+    /**
+     * 删除博主
+     */
+    public function delete()
+    {
+        // 验证数据。
+        $validator = Validator::make(Input::all(), [
+            'id' => 'required|exists:users,id'
+        ], [
+            'id.required' => '删除的博主不能为空',
+            'id.exists' => '删除的博主不存在'
+        ]);
+        if ($validator->fails()) {
+            return Response::make($validator->messages()->first(), 402);
+        }
+
+        // 删除博主
+        $ids = (array) Input::get('id');
+        User::whereIn('id', $ids)->delete();
+
+        // 结果返回
+        return 'success';
     }
 }

@@ -8,6 +8,7 @@ use App\UserFile;
 use App\Storage;
 use Response;
 use Auth;
+use Image;
 
 class StorageController extends Controller
 {

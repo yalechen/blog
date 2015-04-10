@@ -1,5 +1,13 @@
 <?php
-Route::get('/', 'WelcomeController@index');
+Route::pattern('id', '[0-9]+');
+Route::pattern('width', '[0-9]+');
+Route::pattern('height', '[0-9]+');
+
+Route::get('/', [
+    'name' => '博客首页',
+    'as' => 'BlogIndex',
+    'uses' => 'WelcomeController@index'
+]);
 
 Route::get('home', 'HomeController@index');
 
@@ -103,6 +111,13 @@ Route::group([
         'name' => '个人资料保存',
         'as' => 'UserSave',
         'uses' => 'UserController@save'
+    ]);
+
+    // 博主删除
+    Route::post('user/delete', [
+        'name' => '删除博主',
+        'as' => 'UserDelete',
+        'uses' => 'UserController@delete'
     ]);
 });
 

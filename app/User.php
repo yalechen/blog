@@ -71,6 +71,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             if ($model->isDirty('article_count') || $model->isDirty('mood_count')) {
                 return false;
             }
+
+            if ($model->province_id > 0 || $model->city_id > 0) {
+                $model->region_name = Province::find($model->province_id)->name . ' ' . City::find($model->city_id)->name;
+            }
         });
     }
 
@@ -103,7 +107,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function avatar()
     {
-        return $this->belongsTo('App\Storage', 'logo_hash');
+        return $this->belongsTo('App\Storage', 'avatar_hash');
     }
 
     /**
@@ -117,17 +121,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * 头像CDN地址
      */
-    public function getAvatarUrlAttribute()
+    /* public function getAvatarUrlAttribute()
     {
         return action('StorageController@getFile', [
             'hash' => $this->avatar_hash
         ]);
-    }
+    } */
 
     /**
      * 是否是某种角色
      */
-    public function scopeHasRole($query,$key)
+    public function scopeHasRole($query, $key)
     {
         if (! isset($this->hasRole) && Auth::check()) {
             $this->hasRole = in_array(Role::whereKey($key)->first()->id, Auth::user()->roles()->lists('id'));

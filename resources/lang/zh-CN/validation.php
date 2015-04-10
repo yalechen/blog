@@ -73,6 +73,8 @@ return [
 	"unique"               => ":attribute 已经存在。",
 	"url"                  => ":attribute 不是一个合法的URL。",
 	"timezone"             => ":attribute 必须是一个合法的时区值。",
+	"mobile"             => ":attribute 必须是一个11位数的号码。",
+	"realname"             => ":attribute 必须是一个2到4个汉字的中文。",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -107,6 +109,12 @@ return [
     	'email' => '邮箱地址',
     	'password' => '密码',
     	'remember_me' => '记住密码',
+    	'mobile' => '手机号',
+    	'nickname' => '昵称',
+    	'realname' => '真实姓名',
+    	'province_id' => '省份',
+    	'city_id' => '城市',
+    	'signature' => '个性签名',
     ],
 
 ];

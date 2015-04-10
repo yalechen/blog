@@ -42,11 +42,11 @@
       </script>
     <![endif]-->
     <script type="text/javascript" src="{asset('plugins/sparkline/jquery.sparkline.min.js')}"></script>
-    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.min.js')}"></script>
+    <!-- <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.min.js')}"></script>
     <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.tooltip.min.js')}"></script>
     <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.resize.min.js')}"></script>
     <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.time.min.js')}"></script>
-    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.growraf.min.js')}"></script>
+    <script type="text/javascript" src="{asset('plugins/flot/jquery.flot.growraf.min.js')}"></script> -->
     <script type="text/javascript" src="{asset('plugins/easy-pie-chart/jquery.easy-pie-chart.min.js')}"></script>
     <script type="text/javascript" src="{asset('plugins/daterangepicker/moment.min.js')}"></script>
     <script type="text/javascript" src="{asset('plugins/daterangepicker/daterangepicker.js')}"></script>
@@ -69,8 +69,8 @@
     </script>
     <script type="text/javascript" src="{asset('js/custom.js')}"></script>
     <script type="text/javascript" src="{asset('js/demo/pages_calendar.js')}"></script>
-    <script type="text/javascript" src="{asset('js/demo/charts/chart_filled_blue.js')}"></script>
-    <script type="text/javascript" src="{asset('js/demo/charts/chart_simple.js')}"></script>
+    <!-- <script type="text/javascript" src="{asset('js/demo/charts/chart_filled_blue.js')}"></script>
+    <script type="text/javascript" src="{asset('js/demo/charts/chart_simple.js')}"></script> -->
     {block head}{/block}
   </head>
   
@@ -79,32 +79,21 @@
       <div class="container">
         <ul class="nav navbar-nav">
           <li class="nav-toggle">
-            <a href="javascript:void(0);" title="">
-              <i class="icon-reorder">
-              </i>
-            </a>
+            <a href="javascript:void(0);" title=""><i class="icon-reorder"></i></a>
           </li>
         </ul>
         <a class="navbar-brand" href="index.html">
           <img src="assets/img/logo.png" alt="logo" />
-          <strong>
-            博客
-          </strong>
-          Admin
+          <strong>博客</strong> Admin
         </a>
-        <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom"
-        data-original-title="Toggle navigation">
-          <i class="icon-reorder">
-          </i>
+        <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom" data-original-title="Toggle navigation">
+          <i class="icon-reorder"></i>
         </a>
         {include 'admin/_layout/navbar-left-menu.tpl'}
         {include 'admin/_layout/navbar-right-menu.tpl'}
       </div>
       <div id="project-switcher" class="container project-switcher">
-        <div id="scrollbar">
-          <div class="handle">
-          </div>
-        </div>
+        <div id="scrollbar"><div class="handle"></div></div>
         <div id="frame">
           {include 'admin/_layout/scrollbar-menu.tpl'}
         </div>
@@ -239,6 +228,8 @@
             </ul>
             {include 'admin/_layout/crumb-right-menu.tpl'}
           </div>
+          <div class="page-header"></div>
+          {include 'admin/_layout/message.tpl'}
           {block main}{/block}
         </div>
       </div>

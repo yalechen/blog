@@ -3,25 +3,27 @@
 {block title}{if $id gt 0}{assign "hname" "编辑"}{else}{assign "hname" "新增"}{/if}{$hname}博主{/block}
 
 {block breadcrumb}
-	<li><i class="icon-home"></i><a href="{route('UserList')}"> 用户列表</a></li>
-	<li class="current"><a href="{route('UserEdit')}" title=""> {$hname}用户</a></li>
+	<li><i class="icon-home"></i><a href="{route('UserList')}"> 博主管理</a></li>
+	<li class="current"><a href="{route('UserEdit')}" title=""> {$hname}博主</a></li>
 {/block}
 
 {block main}
-<div class="page-header"></div>
-          
 <div class="row">
 	<div class="col-md-12">
 		<div class="widget box">
 			<div class="widget-header"><h4><i class="icon-reorder"></i>{$hname}博主</h4></div>
-			<div class="page-header"></div>
             <div class="widget-content">
-				<form class="form-horizontal row-border" id="user_form">
-                	<div class="alert alert-info fade in"><i class="icon-remove close" data-dismiss="alert"></i>消息提醒</div>
+				<form class="form-horizontal row-border" id="user_form" method="post" action="{route('UserSave')}">
                 	<div class="form-group">
                   		<label class="col-md-2 control-label">邮箱<span class="required">*</span></label>
                   		<div class="col-md-10">
                     		<input type="text" name="email" value="{$data.email|default:Input::old('email')}" class="form-control" placeholder="" {if $id gt 0}readonly=""{/if} required>
+                  		</div>
+                	</div>
+                	<div class="form-group">
+                  		<label class="col-md-2 control-label">密码{if !$id}<span class="required">*</span>{/if}</label>
+                  		<div class="col-md-10">
+                    		<input type="text" name="password" value="" class="form-control" placeholder="当修改时密码不填则默认不做修改" {if !$id}required{/if}>
                   		</div>
                 	</div>
                 	<div class="form-group">
@@ -77,10 +79,12 @@
                       	</div>
                     </div>
                     <div class="form-actions">
-                    	<input type="button" id="submit_btn" value="保存" class="btn btn-primary pull-right">
+                    	<input type="submit" id="submit_btn" value="保存" class="btn btn-primary pull-right">
+                    	<!-- 当用ajax提交时，则type必须为button，无需method和action，即为下面一行的提交保存按钮 -->
+                    	<!-- <input type="button" id="submit_btn" value="保存" class="btn btn-primary pull-right"> -->
                     	<input type="button" value="取消" onclick="history.go(-1);" class="btn pull-right">
                       	<input type="hidden" name="_token" value="{csrf_token()}">
-                      	<input type="hidden" name="id" value="{$id|default:0}">
+                      	<input type="hidden" name="id" value="{$id}">
                     </div>
                 </form>
             </div>
@@ -128,7 +132,7 @@ function getCity() {
 }
 
 //ajax提交
-$("#submit_btn").click(function() {
+/* $("#submit_btn").click(function() {
     var action = $(this).attr('data-action');
     if (action == 1) {
         return false;
@@ -146,10 +150,14 @@ $("#submit_btn").click(function() {
             window.location.href = action_url;
         },
         error : function(xhq) {
-            obj.attr('data-action', 0);
-            alert(xhq.responseText);
+        	obj.attr('data-action', 0);
+        	for (var i in xhq) {
+                alert(i + '--' + xhq[i]);
+            }
+            
+            //$(".alert").text(xhq.responseText);
         }
     });
-});
+}); */
 </script>
 {/block}
