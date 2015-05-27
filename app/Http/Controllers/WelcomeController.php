@@ -30,6 +30,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+	    dd(Input::all());
 		return view('welcome');
 	}
 

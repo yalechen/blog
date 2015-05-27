@@ -164,11 +164,6 @@ return [
         'Barryvdh\Debugbar\ServiceProvider',
         //https://github.com/barryvdh/laravel-debugbar
 
-        //总后台
-        'Frozennode\Administrator\AdministratorServiceProvider',
-        //https://github.com/FrozenNode/Laravel-Administrator
-
-
 	],
 
 	/*

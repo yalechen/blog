@@ -61,10 +61,6 @@ class CategoryTableSeeder extends Seeder
                     array(
                         'name' => '缓存',
                         'sub_categorys' => array()
-                    ),
-                    array(
-                        'name' => 'Others',
-                        'sub_categorys' => array()
                     )
                 )
             ),
@@ -86,10 +82,6 @@ class CategoryTableSeeder extends Seeder
                     array(
                         'name' => 'Console',
                         'sub_categorys' => array()
-                    ),
-                    array(
-                        'name' => 'Others',
-                        'sub_categorys' => array()
                     )
                 )
             ),
@@ -103,10 +95,6 @@ class CategoryTableSeeder extends Seeder
                     array(
                         'name' => 'CSS',
                         'sub_categorys' => array()
-                    ),
-                    array(
-                        'name' => 'Others',
-                        'sub_categorys' => array()
                     )
                 )
             ),
@@ -119,10 +107,6 @@ class CategoryTableSeeder extends Seeder
                     ),
                     array(
                         'name' => '互联网的那些事儿',
-                        'sub_categorys' => array()
-                    ),
-                    array(
-                        'name' => 'Others',
                         'sub_categorys' => array()
                     )
                 )
@@ -149,10 +133,6 @@ class CategoryTableSeeder extends Seeder
                     array(
                         'name' => '插件应用',
                         'sub_categorys' => array()
-                    ),
-                    array(
-                        'name' => 'Others',
-                        'sub_categorys' => array()
                     )
                 )
             ),
@@ -165,10 +145,6 @@ class CategoryTableSeeder extends Seeder
                     ),
                     array(
                         'name' => '架构篇',
-                        'sub_categorys' => array()
-                    ),
-                    array(
-                        'name' => 'Others',
                         'sub_categorys' => array()
                     )
                 )
@@ -184,21 +160,21 @@ class CategoryTableSeeder extends Seeder
         );
 
         // 添加博文分类列表
-        $this->addCateGory($data);
+        foreach (User::all() as $user) {
+            $this->addCateGory($user,$data);
+        }
     }
 
-    protected function addCateGory($data, $parent_id = 0)
+    protected function addCateGory($user,$data, $parent_id = 0)
     {
-        foreach (User::all() as $user) {
-            foreach ($data as $item) {
-                $category = new Category();
-                $category->user()->associate($user);
-                $category->name = $item['name'];
-                $category->parent_id = $parent_id;
-                $category->save();
+        foreach ($data as $item) {
+            $category = new Category();
+            $category->user()->associate($user);
+            $category->name = $item['name'];
+            $category->parent_id = $parent_id;
+            $category->save();
 
-                $this->addCateGory($item['sub_categorys'], $category->id);
-            }
+            $this->addCateGory($user,$item['sub_categorys'], $category->id);
         }
     }
 }

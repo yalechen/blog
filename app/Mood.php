@@ -23,4 +23,12 @@ class Mood extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * 心情图片
+     */
+    public function images()
+    {
+        return $this->belongsToMany('App\Storage', 'mood_images', 'mood_id', 'image_hash');
+    }
 }

@@ -62,6 +62,9 @@ trait InfiniteHierarchy
      */
     public function getPathAttribute()
     {
+        if (! isset($this->attributes['parent_path'])) {
+            return null;
+        }
         return ($this->attributes['parent_path'] ?  : ':') . $this->attributes[$this->getKeyName()] . ':';
     }
 

@@ -55,6 +55,12 @@ class CreateArticlesTable extends Migration
             // 浏览数
             $table->integer('view_count', false, false)->default(0);
 
+            // 是否可被评论
+            $table->enum('is_becomment', [
+                Article::COMMENT_YES,
+                Article::COMMENT_NO
+            ])->default(Article::COMMENT_YES);
+
             $table->softDeletes();
             $table->timestamps();
         });
